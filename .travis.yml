@@ -1,6 +1,6 @@
 language: android
 jdk: oraclejdk8
-script: ./gradlew test
+script: ./gradlew detekt test
 android:
   components:
     - tools
