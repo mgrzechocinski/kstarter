@@ -26,6 +26,21 @@ android {
     }
 }
 
+configurations {
+    detekt
+}
+
+task detekt(type: JavaExec) {
+    main = "io.gitlab.arturbosch.detekt.cli.Main"
+    classpath = configurations.detekt
+    def input = "$project.projectDir.absolutePath"
+    def config = "$project.rootDir/detekt.yml"
+    //def filters = ".*test.*"
+    def rulesets = ""
+    def params = [ '-p', input, '-c', config, '-r', rulesets]
+    args(params)
+}
+
 dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -34,4 +49,7 @@ dependencies {
     testCompile ("com.github.memoizr:assertk-core:1.0.0-beta.2"){
         exclude group: 'org.jetbrains.kotlin'
     }
+
+    detekt 'io.gitlab.arturbosch.detekt:detekt-cli:1.0.0.M10'
+    detekt 'io.gitlab.arturbosch.detekt:detekt-formatting:1.0.0.M10'
 }
