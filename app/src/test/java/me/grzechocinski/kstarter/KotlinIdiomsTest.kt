@@ -1,6 +1,8 @@
 package me.grzechocinski.kstarter
 
+import com.memoizr.assertk.AbstractAssertBuilder
 import com.memoizr.assertk.expect
+import com.memoizr.assertk.isInstance
 import org.assertj.core.api.Fail
 import org.junit.Ignore
 import org.junit.Test
@@ -28,9 +30,9 @@ class KotlinIdiomsTest {
     @Test fun `should have default values`() {
 
         // TODO [mgrzechocinski on 13/05/2017]: Why it doesn't infer type, whereas inline version does?
-        /*
-            fun foo(a: Int = 5, b: Int){
-                return a + b
+
+        /*fun foo(a: Int = 5, b: Int){
+            return a + b
         }*/
 
         fun foo(a: Int = 5, b: Int) = a + b
@@ -88,12 +90,14 @@ class KotlinIdiomsTest {
     @Test fun `should deny to call set on immutable map`() {
         val map = mapOf("a" to 1, "b" to 2, "c" to 3)
 
+        //map["a"] = 1
+
         expect that map["a"] isEqualTo 1
     }
 
     @Test fun `should init property lazily`() {
 
-        val lazy: String by lazy {
+        val lazy by lazy {
             "layzvalue"
         }
 
@@ -109,13 +113,13 @@ class KotlinIdiomsTest {
 
     @Test fun `should be a singleton`() {
 
-        val r1 = Resource
-        val r2 = Resource
+        val r1 = ResourceObject
+        val r2 = ResourceObject
 
         expect that r1 isEqualTo r2
     }
 
-    object Resource {
+    object ResourceObject {
         val name = "Name"
     }
 
@@ -147,9 +151,7 @@ class KotlinIdiomsTest {
         expect that transform("Green") isEqualTo 1
         expect that transform("Blue") isEqualTo 2
 
-        // TODO [mgrzechocinski on 13/05/2017]: Why is doesn't work?
-        /*expect thatThrownBy { transform("Yellow") } isInstance IllegalArgumentException.class*/
-
+        expect thatThrownBy { transform("Yellow") } isInstance AbstractAssertBuilder.InstanceMatcher<IllegalArgumentException>()
         expect thatThrownBy { transform("Yellow") } hasMessage "Invalid color param value"
     }
 
