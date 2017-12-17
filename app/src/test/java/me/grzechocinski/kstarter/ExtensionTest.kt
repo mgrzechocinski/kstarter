@@ -18,26 +18,50 @@ class ExtensionTest {
     fun fullNameFirstSurname() = "$surname $name"
   }
 
+  @Suppress("UNUSED_EXPRESSION")
   @Test
-  fun `should use with keyword to call one object multiple time`() {
+  fun `should show the difference between let, also, apply, with, run`() {
 
     val dto = DTO("John", "Brown")
 
-    with(dto) {
-      expect that this.fullNameFirstName() isEqualTo "John Brown"
-      expect that this.fullNameFirstSurname() isEqualTo "Brown John"
-    }
-
-    dto.let {
+    //LET
+    val resultOfLet = dto.let {
       expect that it.fullNameFirstName() isEqualTo "John Brown"
       expect that it.fullNameFirstSurname() isEqualTo "Brown John"
+      "result of let"
     }
+    expect that resultOfLet isEqualTo "result of let"
 
-    dto.apply {
+    //LET
+    val resultOfAlso = dto.also {
+      expect that it.fullNameFirstName() isEqualTo "John Brown"
+      expect that it.fullNameFirstSurname() isEqualTo "Brown John"
+      "result of also"
+    }
+    expect that resultOfAlso isEqualTo dto
+
+    //APPLY
+    val resultOfApply = dto.apply {
       expect that this.fullNameFirstName() isEqualTo "John Brown"
       expect that this.fullNameFirstSurname() isEqualTo "Brown John"
+      "result of apply"
     }
+    expect that resultOfApply isEqualTo dto
 
-    // TODO [mgrzechocinski on 13/05/2017]: So when should we use 'with' ?
+    //WITH
+    val resultOfWith = with(dto) {
+      expect that this.fullNameFirstName() isEqualTo "John Brown"
+      expect that this.fullNameFirstSurname() isEqualTo "Brown John"
+      "result of with"
+    }
+    expect that resultOfWith isEqualTo "result of with"
+
+    // RUN (roughly same as with() but as extension. More: https://stackoverflow .com/questions/38501764/difference-between-with-and-run-in-kotlin)
+    val resultOfRun = dto.run {
+      expect that this.fullNameFirstName() isEqualTo "John Brown"
+      expect that this.fullNameFirstSurname() isEqualTo "Brown John"
+      "result of run"
+    }
+    expect that resultOfRun isEqualTo "result of run"
   }
 }

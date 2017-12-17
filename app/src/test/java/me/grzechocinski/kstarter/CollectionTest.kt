@@ -1,6 +1,9 @@
 package me.grzechocinski.kstarter
 
+import com.googlecode.catchexception.apis.BDDCatchException.`when`
+import com.googlecode.catchexception.apis.BDDCatchException.caughtException
 import com.memoizr.assertk.expect
+import org.assertj.core.api.BDDAssertions.then
 import org.junit.Test
 
 class CollectionTest {
@@ -14,6 +17,22 @@ class CollectionTest {
     for (index in grizabellas.indices) {
       expect that grizabellas[index] isEqualTo expectations.getValue(index)
     }
+  }
+
+  @Test
+  fun `should iterate with pair of index and value`() {
+    val grizabellas = listOf("Elaine", "Mamie", "Betty", "Leona")
+
+    val starring: Array<String?> = arrayOfNulls(grizabellas.size)
+
+    for ((index, value) in grizabellas.withIndex()) {
+      starring[index] = "${index+1}) $value"
+    }
+
+    expect that starring[0] isEqualTo "1) Elaine"
+    expect that starring[1] isEqualTo "2) Mamie"
+    expect that starring[2] isEqualTo "3) Betty"
+    expect that starring[3] isEqualTo "4) Leona"
   }
 
   @Test
@@ -47,5 +66,35 @@ class CollectionTest {
     expect that mutableMap["a"] isEqualTo 100
   }
 
+  @Test
+  fun `should find existing collection member with when keyword`() {
+    val androidSweets = listOf("Lollipop", "Marshmallow", "Nougat", "Oreo")
+    val result = when {
+      "Nougat" in androidSweets -> "Nougat is here!"
+      else -> throw IllegalStateException("Sould find 'Nougat' in array")
+    }
 
+    expect that result isEqualTo "Nougat is here!"
+  }
+
+  @Suppress("ReplaceGetOrSet")
+  @Test
+  fun `should access map entries in different ways`() {
+    val nameToAge = mapOf("John" to 34)
+
+    expect that nameToAge["John"]?.plus(5) isEqualTo 39
+    expect that nameToAge["Mary"]?.plus(5) _is null
+
+    expect that nameToAge.get("John")?.plus(5) isEqualTo 39
+    expect that nameToAge.get("Mary")?.plus(5) _is null
+
+    //Since Kotlin 1.1 - non nullable type
+    expect that nameToAge.getValue("John") isEqualTo 34
+
+    `when` { nameToAge.getValue("Mary") }
+    then(caughtException())
+      .isExactlyInstanceOf(NoSuchElementException::class.java)
+      .hasMessage("Key Mary is missing in the map.")
+
+  }
 }

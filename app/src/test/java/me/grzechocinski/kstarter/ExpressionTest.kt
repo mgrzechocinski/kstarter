@@ -1,8 +1,9 @@
 package me.grzechocinski.kstarter
 
-import com.memoizr.assertk.AbstractAssertBuilder
+import com.googlecode.catchexception.apis.BDDCatchException.`when`
+import com.googlecode.catchexception.apis.BDDCatchException.caughtException
 import com.memoizr.assertk.expect
-import com.memoizr.assertk.isInstance
+import org.assertj.core.api.BDDAssertions.then
 import org.junit.Test
 
 class ExpressionTest {
@@ -25,23 +26,21 @@ class ExpressionTest {
   }
 
   @Test
-  fun `should return when statemant`() {
-    fun transform(color: String): Int {
-      return when (color) {
-        "Red" -> 0
-        "Green" -> 1
-        "Blue" -> 2
-        else -> throw IllegalArgumentException("Invalid color param value")
-      }
+  fun `should return when statement as a single-expression function`() {
+    fun transform(color: String) = when (color) {
+      "Red" -> 0
+      "Green" -> 1
+      "Blue" -> 2
+      else -> throw IllegalArgumentException("Invalid color param value")
     }
 
     expect that transform("Red") isEqualTo 0
     expect that transform("Green") isEqualTo 1
     expect that transform("Blue") isEqualTo 2
 
-    expect thatThrownBy {
-      transform("Yellow")
-    } isInstance AbstractAssertBuilder.InstanceMatcher<IllegalArgumentException>()
-    expect thatThrownBy { transform("Yellow") } hasMessage "Invalid color param value"
+    `when` { transform("Yellow") }
+    then(caughtException())
+      .isExactlyInstanceOf(IllegalArgumentException::class.java)
+      .hasMessage("Invalid color param value")
   }
 }

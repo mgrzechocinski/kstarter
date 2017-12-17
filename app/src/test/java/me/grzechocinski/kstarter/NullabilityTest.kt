@@ -25,7 +25,7 @@ class NullabilityTest {
   fun `should use elvis operator for nullable types`() {
 
     val nullable: String? = null
-    expect that (nullable?.substring(1, 2) == null) isEqualTo true
+    expect that nullable?.substring(1, 2) _is null
 
     expect that (nullable?.substring(1, 2) ?: "empty") isEqualTo "empty"
 

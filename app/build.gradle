@@ -46,6 +46,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation 'eu.codearte.catch-exception:catch-exception:2.0.0-beta-1'
     testImplementation ("com.github.memoizr:assertk-core:1.0.0-beta.2"){
         exclude group: 'org.jetbrains.kotlin'
     }
