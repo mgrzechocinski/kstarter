@@ -160,8 +160,8 @@ class KotlinIdiomsTest {
         val dto = DTO("John", "Brown")
 
         with(dto) {
-            expect that fullNameFirstName() isEqualTo "John Brown"
-            expect that fullNameFirstSurname() isEqualTo "Brown John"
+            expect that this.fullNameFirstName() isEqualTo "John Brown"
+            expect that this.fullNameFirstSurname() isEqualTo "Brown John"
         }
 
         dto.let {
@@ -170,8 +170,8 @@ class KotlinIdiomsTest {
         }
 
         dto.apply {
-            expect that fullNameFirstName() isEqualTo "John Brown"
-            expect that fullNameFirstSurname() isEqualTo "Brown John"
+            expect that this.fullNameFirstName() isEqualTo "John Brown"
+            expect that this.fullNameFirstSurname() isEqualTo "Brown John"
         }
 
         // TODO [mgrzechocinski on 13/05/2017]: So when should we use 'with' ?
