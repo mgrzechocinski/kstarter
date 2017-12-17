@@ -1,6 +1,7 @@
 package me.grzechocinski.kstarter
 
 import com.memoizr.assertk.expect
+import com.memoizr.assertk.of
 import org.junit.Test
 
 class KotlinBasicTypesTest {
@@ -21,5 +22,11 @@ class KotlinBasicTypesTest {
         val anotherBoxedA: Int? = a
 
         expect that (boxedA == anotherBoxedA) isEqualTo true
+    }
+
+    @Test fun `should be long`(){
+        val l = 1L + 3
+
+        expect that l isInstance of<Long>()
     }
 }
