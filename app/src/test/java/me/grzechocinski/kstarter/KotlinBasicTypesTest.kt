@@ -6,27 +6,30 @@ import org.junit.Test
 
 class KotlinBasicTypesTest {
 
-    @Test fun `should have different references due to boxing`() {
-        val a: Int = 10000
-        expect that (a === a) isEqualTo true
+  @Test
+  fun `should have different references due to boxing`() {
+    val a: Int = 10000
+    expect that (a === a) isEqualTo true
 
-        val boxedA: Int? = a
-        val anotherBoxedA: Int? = a
+    val boxedA: Int? = a
+    val anotherBoxedA: Int? = a
 
-        expect that (boxedA === anotherBoxedA) isEqualTo false
-    }
+    expect that (boxedA === anotherBoxedA) isEqualTo false
+  }
 
-    @Test fun `should be equal after boxing`() {
-        val a: Int = 10000
-        val boxedA: Int? = a
-        val anotherBoxedA: Int? = a
+  @Test
+  fun `should be equal after boxing`() {
+    val a: Int = 10000
+    val boxedA: Int? = a
+    val anotherBoxedA: Int? = a
 
-        expect that (boxedA == anotherBoxedA) isEqualTo true
-    }
+    expect that (boxedA == anotherBoxedA) isEqualTo true
+  }
 
-    @Test fun `should be long`(){
-        val l = 1L + 3
+  @Test
+  fun `should be long`() {
+    val l = 1L + 3
 
-        expect that l isInstance of<Long>()
-    }
+    expect that l isInstance of<Long>()
+  }
 }
