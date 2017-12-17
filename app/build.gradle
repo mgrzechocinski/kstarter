@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
 
     defaultConfig {
-        applicationId "kstarter"
+        applicationId "me.grzechocinski.kstarter"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -42,11 +42,11 @@ task detekt(type: JavaExec) {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    testCompile 'junit:junit:4.12'
-    testCompile ("com.github.memoizr:assertk-core:1.0.0-beta.2"){
+    testImplementation 'junit:junit:4.12'
+    testImplementation ("com.github.memoizr:assertk-core:1.0.0-beta.2"){
         exclude group: 'org.jetbrains.kotlin'
     }
 
