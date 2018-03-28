@@ -9,7 +9,7 @@ import org.threeten.bp.format.FormatStyle
  */
 class SystemDate(isoDate: String) {
 
-  val value: LocalDate = LocalDate.parse(isoDate, DateTimeFormatter.ISO_DATE)
+  private val value: LocalDate = LocalDate.parse(isoDate, DateTimeFormatter.ISO_DATE)
 
   override fun toString(): String {
     return value.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
