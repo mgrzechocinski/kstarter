@@ -79,7 +79,7 @@ class CollectionTest {
 
   @Suppress("ReplaceGetOrSet")
   @Test
-  fun `should access map entries in different ways`() {
+  fun `should access map entries in different ways`(){
     val nameToAge = mapOf("John" to 34)
 
     expect that nameToAge["John"]?.plus(5) isEqualTo 39

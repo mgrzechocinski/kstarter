@@ -9,6 +9,7 @@ plugins {
   id("com.android.application")
   id("kotlin-android")
   id("kotlin-android-extensions")
+  id("io.gitlab.arturbosch.detekt").version("1.0.0.RC9.2")
 }
 
 android {
@@ -28,12 +29,17 @@ android {
       proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
     }
   }
+}
 
-  /*testOptions.unitTests.all {
-    testLogging {
-      exceptionFormat = "full"
-    }
-  }*/
+detekt {
+  input = files(
+    "src/main/java",
+    "src/test/java"
+  )
+  config = files(project.rootDir.resolve("detekt.yml"))
+  reports {
+    html.enabled = true
+  }
 }
 
 dependencies {
@@ -47,5 +53,4 @@ dependencies {
   testImplementation("junit:junit:4.12")
   testImplementation("org.mockito:mockito-core:2.13.0")
   testImplementation("eu.codearte.catch-exception:catch-exception:2.0.0-beta-1")
-
 }

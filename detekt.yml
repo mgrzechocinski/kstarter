@@ -1,22 +1,37 @@
 autoCorrect: false
 
 build:
-  warningThreshold: 5
-  failThreshold: 10
+  maxIssues: 0
   weights:
-    code-smell: 2
+    complexity: 2
+    formatting: 0
     LongParameterList: 1
+    comments: 0.5
+
+performance:
+  active: true
+  SpreadOperator:
+    active: false
 
 potential-bugs:
   active: true
+  DuplicateCaseInWhenExpression:
+    active: true
+  EqualsWithHashCodeExist:
+    active: true
+  ExplicitGarbageCollectionCall:
+    active: true
+  UnsafeCast:
+    active: false
+  UnsafeCallOnNullableType:
+    active: false
+  LateinitUsage:
+    active: false
 
 exceptions:
   active: true
 
-comments:
-  active: true
-
-empty:
+empty-blocks:
   active: true
 
 complexity:
@@ -30,9 +45,11 @@ complexity:
   ComplexMethod:
     threshold: 10
   TooManyFunctions:
-    threshold: 20
+    threshold: 15
   ComplexCondition:
     threshold: 3
+  LabeledExpression:
+    active: false
 
 code-smell:
   active: true
@@ -43,58 +60,53 @@ code-smell:
 
 formatting:
   active: true
-  useTabs: true
+  useTabs: false
   Indentation:
-    active: false
-    autoCorrect: false
+    active: true
+    indentSize: "2"
   ConsecutiveBlankLines:
     active: true
-    autoCorrect: false
   MultipleSpaces:
     active: true
-    autoCorrect: false
   SpacingAfterComma:
     active: true
-    autoCorrect: false
   SpacingAfterKeyword:
     active: true
-    autoCorrect: false
   SpacingAroundColon:
     active: true
-    autoCorrect: false
   SpacingAroundCurlyBraces:
     active: true
-    autoCorrect: false
   SpacingAroundOperator:
     active: true
-    autoCorrect: false
   TrailingSpaces:
     active: true
-    autoCorrect: false
   UnusedImports:
     active: true
-    autoCorrect: false
   OptionalSemicolon:
     active: true
-    autoCorrect: false
   OptionalUnit:
     active: true
-    autoCorrect: false
+  ExpressionBodySyntax:
+    active: false
+  ExpressionBodySyntaxLineBreaks:
+    active: false
 
 style:
   active: true
   WildcardImport:
-    active: true
+    active: false # handled by a custom rule
   NamingConventionViolation:
+    active: false # handled by a custom rule
+  MaxLineLength:
     active: true
-    variablePattern: '^(_)?[a-z$][a-zA-Z$0-9]*$'
-    constantPattern: '^([A-Z_]*|serialVersionUID)$'
-    methodPattern: 'should.*|[a-zA-Z]*'
-    classPattern: '[A-Z$][a-zA-Z$]*'
-    enumEntryPattern: '^[A-Z$][A-Z_$]*$'
+    maxLineLength: 170
+    excludePackageStatements: false
+    excludeImportStatements: false
+  ForbiddenComment:
+    active: false
 
 comments:
-  active: true
+  active: false
   CommentOverPrivateMethod:
     active: true
   CommentOverPrivateProperty:
@@ -104,11 +116,19 @@ comments:
   NoDocOverPublicMethod:
     active: false
 
+custom:
+  active: true
+  ExtendedWildcardImport:
+    active: true
+    importExceptions: '["kotlinx.android.synthetic.*"]'
+  ExtendedNamingConventionViolation:
+    active: true
+
 # *experimental feature*
 # Migration rules can be defined in the same config file or a new one
-#migration:
-#  active: true
-#  imports:
+migration:
+  active: true
+  imports:
     # your.package.Class: new.package.or.Class
     # for example:
     # io.gitlab.arturbosch.detekt.api.Rule: io.gitlab.arturbosch.detekt.rule.Rule
