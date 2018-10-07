@@ -45,12 +45,11 @@ detekt {
 dependencies {
   implementation("com.android.support:appcompat-v7:28.0.0")
   implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
-  implementation("com.jakewharton.threetenabp:threetenabp:1.0.5")
+  implementation("com.jakewharton.threetenabp:threetenabp:1.1.0")
 
   testImplementation("com.github.memoizr:assertk-core:1.0.0-beta.2") {
     exclude("org.jetbrains.kotlin")
   }
   testImplementation("junit:junit:4.12")
-  testImplementation("org.mockito:mockito-core:2.13.0")
   testImplementation("eu.codearte.catch-exception:catch-exception:2.0.0-beta-1")
 }
