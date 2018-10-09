@@ -8,8 +8,11 @@ import org.gradle.internal.impldep.com.amazonaws.PredefinedClientConfigurations.
 plugins {
   id("com.android.application")
   id("kotlin-android")
-  id("kotlin-android-extensions")
   id("io.gitlab.arturbosch.detekt").version("1.0.0.RC9.2")
+}
+
+apply{
+  from("$rootDir/kotlin_shared.gradle.kts")
 }
 
 android {
