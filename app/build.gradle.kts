@@ -47,6 +47,8 @@ dependencies {
   implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
   implementation("com.jakewharton.threetenabp:threetenabp:1.1.0")
 
+  implementation("com.android.support.constraint:constraint-layout:1.1.3")
+
   testImplementation("com.github.memoizr:assertk-core:1.0.0-beta.2") {
     exclude("org.jetbrains.kotlin")
   }
