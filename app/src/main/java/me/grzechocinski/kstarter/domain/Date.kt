@@ -11,4 +11,14 @@ class Date(dateToParse: String) {
   override fun toString(): String {
     return value.toString()
   }
+
+  operator fun rangeTo(yearEnd: Date): DateRange = DateRange(this, yearEnd)
+
+  class DateRange(private val yearStart: Date, private val yearEnd: Date) {
+
+    operator fun contains(yearMiddle: Date): Boolean {
+       return yearMiddle.value.before(yearEnd.value) &&
+         yearMiddle.value.after(yearStart.value)
+    }
+  }
 }

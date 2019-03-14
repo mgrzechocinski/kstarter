@@ -15,9 +15,9 @@ class DateTest {
     val yearMiddle = Date("2018-06-01")
 
     //when
-    //val isInMiddle: Boolean = yearMiddle in yearStart..yearEnd
+    val isInMiddle: Boolean = yearMiddle in yearStart..yearEnd
 
     //then
-    //expect that isInMiddle isEqualTo true
+    expect that isInMiddle isEqualTo true
   }
 }
