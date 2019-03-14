@@ -17,15 +17,15 @@ internal class BoxesListTest {
     val boxes = listOf(single1, single2, single3)
 
     //when
-    val boxesList = BoxesList(boxes)
+    val boxesList = BoxesList(boxes + boxes)
 
     //then
     expect that boxesList[0].header isEqualTo "Ksiązka #0"
     expect that boxesList[1].header isEqualTo "Film #1"
     expect that boxesList[2].header isEqualTo "Muzyka #2"
 
-//    expect that boxesList[3].header isEqualTo "Ksiązka #3"
-//    expect that boxesList[4].header isEqualTo "Film #4"
-//    expect that boxesList[5].header isEqualTo "Muzyka #5"
+    expect that boxesList[3].header isEqualTo "Ksiązka #3"
+    expect that boxesList[4].header isEqualTo "Film #4"
+    expect that boxesList[5].header isEqualTo "Muzyka #5"
   }
 }

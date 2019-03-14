@@ -5,8 +5,7 @@ class BoxesList(boxes: List<Box>) {
   private val value = convert(boxes)
 
   private fun convert(boxes: List<Box>): List<Box> {
-    boxes.mapIndexed { index, box -> box.header = "${box.header} #$index" }
-    return boxes
+    return boxes.mapIndexed { index, box -> box.copy(header = "${box.header} #$index") }
   }
 
   operator fun get(i: Int): Box = value[i]
